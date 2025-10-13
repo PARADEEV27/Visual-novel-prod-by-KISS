@@ -13,8 +13,8 @@ label start:
     Player "Где я?"
     Ymiko "Ты в игре!"
     call park_location #Вызываю локацию Парк  
-    call scene1_Player_in_room_story1
     Player "Отлично! Работа организована!"
     $ player_name = renpy.input("Как тебя зовут?", length=15, exclude="{}[]#@*") or "Игрок"
     Ymiko "Приятно познакомиться, [player_name]!"
+    call scene1_Player_in_room_story1
     return
