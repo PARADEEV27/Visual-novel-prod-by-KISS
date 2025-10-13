@@ -1,7 +1,7 @@
 ﻿# Определение персонажей игры.
 define Ymiko = Character('Юмико', color="#c8ffc8",what_slow_cps=70)
 define Player = Character('Игрок', color="#c8ffc8",what_slow_cps=70)
-
+define Rin = Character('Игрок', color="#c8ffc8",what_slow_cps=70)
 #Создание статов
 default ymiko_love = 0 #Любовь Юмико
 
