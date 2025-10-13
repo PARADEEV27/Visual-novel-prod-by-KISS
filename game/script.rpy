@@ -12,4 +12,5 @@ label start:
     call park_location #Вызываю локацию Парк  
     call scene1_Player_in_room_story1
     Player "Отлично! Работа организована!"
+    Player "На все 100!"
     return
