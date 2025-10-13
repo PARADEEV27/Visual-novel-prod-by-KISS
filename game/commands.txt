@@ -1,0 +1,40 @@
+# Определение персонажей игры.
+define Ymiko = Character('Юмико', color="#c8ffc8",what_slow_cps=70)
+
+#Создание статов
+default ymiko_love = 0 #Любовь Юмико
+
+call park #Вызываю локацию Парк
+
+show Ymiko happy: #Показать Ymiko
+     xpos 0.7 #Расположение на экране
+     linear 7.0 xpos 0.6 #Линейное движение (Время, ось, куда)
+
+menu ch: #Меню выбора
+    e "Как тебе музыка?" #Сам вопрос
+    "Мне нравится": #Вариант 1
+        er "Да, мне нравится, а тебе?" 
+    "Ну не очень":
+        er "Нет, ну не очень прям, а тебе?" 
+
+#Условия
+e "Проверка чувств"
+    if ymiko_love == 0:
+        e "Я тебя не люблю"
+    elif ymiko_love > 0:
+        e "Я тебя люблю"
+
+#Текстуры локаций
+image bg park = im.Scale("i.jfif", 1920, 1080) #Фон локации Парк
+
+#Текстуры персонажей
+image Ymiko happy = im.Scale("Ymiko happy.png", 540, 1111)
+image Ymiko sleep = im.Scale("Ymiko sleep.png", 540, 1111)
+
+#Музыка локаций
+define audio.park_music = "9mice.mp3"
+
+#Комбинирование элементов локаций
+label park: #Создаю локацию Парк
+    scene bg park
+    play music park_music
