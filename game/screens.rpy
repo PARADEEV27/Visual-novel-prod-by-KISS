@@ -341,14 +341,13 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
-    xalign 0.5
     text_align 0.5
     size 28
-    bold True
-    color "#7a9dc6"
+    bold False
+    color "#9cb2cc"
     # Обводка текста: (толщина, цвет, смещение_x, смещение_y)
-    outlines [ (2, "#0f0272", 0, 0) ]
-    hover_outlines [ (2, "#0f3588", 0, 0) ]
+    outlines [ (3, "#141442", 0, 0) ]
+    hover_outlines [ (2, "#40485b", 0, 0) ]
 
 
 ## Экран главного меню #########################################################
@@ -384,6 +383,19 @@ screen main_menu():
             text "[config.version]":
                 style "main_menu_version"
 
+    add "images/палка.png":
+        xalign 0.2
+        yalign 0.1
+        zoom 1.1
+    add "images/logo.png":
+        xalign 0.15
+        yalign 0.0
+        zoom 0.3
+    add "images/Rin1.png":
+        xalign 0.6
+        yalign 1.0
+        zoom 0.6
+
 
 style main_menu_frame is empty
 style main_menu_vbox is vbox
@@ -396,7 +408,7 @@ style main_menu_frame:
     yfill True
 
     background "gui/overlay/main_menu.png"
-
+    
 style main_menu_vbox:
     xalign 1.0
     xoffset -30
@@ -544,6 +556,7 @@ style return_button:
     xpos gui.navigation_xpos
     yalign 1.0
     yoffset -45
+    xalign 0.0
 
 
 ## Экран Об игре ###############################################################
