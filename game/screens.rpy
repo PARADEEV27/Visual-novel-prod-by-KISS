@@ -342,7 +342,7 @@ style navigation_button:
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
     text_align 0.5
-    size 28
+    size 42
     bold False
     color "#9cb2cc"
     # Обводка текста: (толщина, цвет, смещение_x, смещение_y)
@@ -383,10 +383,6 @@ screen main_menu():
             text "[config.version]":
                 style "main_menu_version"
 
-    add "images/палка.png":
-        xalign 0.2
-        yalign 0.1
-        zoom 1.1
     add "images/logo.png":
         xalign 0.15
         yalign 0.0
