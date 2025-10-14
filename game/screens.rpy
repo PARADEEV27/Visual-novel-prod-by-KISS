@@ -333,15 +333,22 @@ screen navigation():
             textbutton _("Выход") action Quit(confirm=not main_menu)
 
 
-style navigation_button is gui_button
-style navigation_button_text is gui_button_text
-
 style navigation_button:
-    size_group "navigation"
     properties gui.button_properties("navigation_button")
+    xalign 0.5
+    xsize 220
+    ysize 50
 
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
+    xalign 0.5
+    text_align 0.5
+    size 28
+    bold True
+    color "#7a9dc6"
+    # Обводка текста: (толщина, цвет, смещение_x, смещение_y)
+    outlines [ (2, "#0f0272", 0, 0) ]
+    hover_outlines [ (2, "#0f3588", 0, 0) ]
 
 
 ## Экран главного меню #########################################################
