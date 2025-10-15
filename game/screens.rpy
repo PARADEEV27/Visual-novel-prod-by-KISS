@@ -386,11 +386,9 @@ screen main_menu():
     add "images/logo.png":
         xalign 0.15
         yalign 0.0
-        zoom 0.3
-    add "images/Rin1.png":
+    add "images/girls.png":
         xalign 0.6
         yalign 1.0
-        zoom 0.6
 
 
 style main_menu_frame is empty
