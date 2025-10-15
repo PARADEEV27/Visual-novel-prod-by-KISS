@@ -17,7 +17,7 @@ label scene2_Hitomi_and_Player():
     player_name "- У меня в классе много ребят, преуспевающих в учёбе"
     player_name "- Но я выделяюсь своими знаниями"
     player_name "- Не могу вспомнить, когда я заметил эту способность"
-    show Hitomi
+    show Hitomi with fade 
     Hitomi "- Хей, [player_name]"
     player_name "({i}А вот и Хитоми, староста{/i})"
     player_name "- Привет, а что случилось?"
