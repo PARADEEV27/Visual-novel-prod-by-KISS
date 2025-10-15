@@ -1,6 +1,6 @@
 #Текстуры локаций
 image bg park = im.Scale("i.jfif", 1920, 1080) #Фон локации Парк
-
+image Hitomi = im.Scale("hitomi_base.png", 540, 1111)
 #Текстуры персонажей
 # image Ymiko happy = im.Scale("Ymiko happy.png", 540, 1111)
 # image Ymiko sleep = im.Scale("Ymiko sleep.png", 540, 1111)

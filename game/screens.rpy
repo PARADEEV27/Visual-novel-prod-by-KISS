@@ -153,7 +153,8 @@ style say_label:
     yalign 0.5
 
 style say_dialogue:
-    properties gui.text_properties("dialogue")
+    properties gui.text_properties("say_dialogue")
+    slow_cps 70
 
     xpos gui.dialogue_xpos
     xsize gui.dialogue_width
@@ -317,7 +318,7 @@ screen navigation():
 
         elif not main_menu:
 
-            textbutton _("Главное меню") action MainMenu()
+            textbutton _("В меню") action MainMenu()
 
         textbutton _("Об игре") action ShowMenu("about")
 
@@ -330,7 +331,8 @@ screen navigation():
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("Выход") action Quit(confirm=not main_menu)
+            textbutton _("Выход") action Quit(confirm=True)
+        # define config.quit_action = Quit(confirm=True)
 
 
 style navigation_button:
