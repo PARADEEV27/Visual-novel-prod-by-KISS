@@ -225,8 +225,9 @@ style fake_button_text:
     xalign 0.5
     yalign 0.5
 
-# всё
+#всё
 
+style window:
     xalign 0.5
     xfill True
     yalign gui.textbox_yalign
