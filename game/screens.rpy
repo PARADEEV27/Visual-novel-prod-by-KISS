@@ -198,10 +198,10 @@ screen foreign_save_detected():
 # Трансформ для убегающей кнопки
 transform running_button_transform:
     on hover:
-        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
-        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
-        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
-        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
+        linear 0.1 xpos renpy.random.randint(200, 400) ypos renpy.random.randint(200, 400)
+        linear 0.1 xpos renpy.random.randint(200, 400) ypos renpy.random.randint(200, 400)
+        linear 0.1 xpos renpy.random.randint(200, 400) ypos renpy.random.randint(200, 400)
+        linear 0.1 xpos renpy.random.randint(200, 400) ypos renpy.random.randint(200, 400)
     on idle:
         pass
 
