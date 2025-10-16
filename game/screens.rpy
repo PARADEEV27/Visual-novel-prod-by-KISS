@@ -4,7 +4,6 @@
 
 init offset = -1
 
-
 ################################################################################
 ## Стили
 ################################################################################
@@ -339,6 +338,8 @@ style navigation_button:
     xalign 0.5
     xsize 220
     ysize 50
+    hover_sound "audio/hover_sound.ogg"
+    
 
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
