@@ -224,8 +224,9 @@ style fake_button_text:
     size 24
     xalign 0.5
     yalign 0.5
-    
-style window:
+
+# всё
+
     xalign 0.5
     xfill True
     yalign gui.textbox_yalign
