@@ -127,6 +127,104 @@ style say_thought is say_dialogue
 style namebox is default
 style namebox_label is say_label
 
+screen foreign_save_detected():
+    modal True
+    zorder 200
+    
+    default attempts = 0
+    
+    add "#00000080"
+    
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xsize 700
+        ysize 350
+        background Frame("gui/alert_frame.png", 25, 25)
+        padding (40, 40)
+        
+        vbox:
+            spacing 25
+            xfill True
+            
+            text "⚠ ОБНАРУЖЕНО ЧУЖОЕ СОХРАНЕНИЕ ⚠":
+                size 32
+                color "#ff3333"
+                bold True
+                xalign 0.5
+                
+            text "Загрузить чужое сохранение?":
+                size 28
+                color "#ffff00"
+                xalign 0.5
+                
+            null height 40
+            
+            hbox:
+                xalign 0.5
+                spacing 100
+                
+                # Кнопка ДА - единственный способ продолжить
+                textbutton "ДА":
+                    style "confirm_button"
+                    action [
+                        Play("sound", "audio/click.mp3"),
+                        Return(True)  # Закрывает окно и продолжает игру
+                    ]
+                
+                # Кнопка НЕТ - не закрывает окно, но даёт стат
+                button:
+                    style "fake_button"
+                    at running_button_transform
+                    action [
+                        Play("sound", "audio/beep.mp3"),
+                        SetScreenVariable("attempts", attempts + 1),
+                        If(attempts == 0, 
+                            Function(renpy.notify, "Системная ошибка: действие недоступно"),
+                            If(attempts == 2,
+                                Function(renpy.notify, "Доступ запрещён"),
+                                If(attempts == 5,
+                                    Function(renpy.notify, "Прекратите попытки"),
+                                    If(attempts == 10,
+                                        Function(renpy.show, "achievement_unlocked"),
+                                        None
+                                    )
+                                )
+                            )
+                        ),
+                        If(attempts >= 10, 
+                            SetField(persistent, "curious_stat", True)
+                        )
+                    ]
+                    
+                    text "НЕТ":
+                        style "fake_button_text"
+
+# Трансформ для убегающей кнопки
+transform running_button_transform:
+    on hover:
+        linear 0.1 xpos renpy.random.randint(200, 1200) ypos renpy.random.randint(100, 800)
+    on idle:
+        pass
+
+style confirm_button:
+    background "#00aa00"
+    hover_background "#00ff00"
+    xsize 180
+    ysize 60
+
+style fake_button:
+    background "#666666"
+    hover_background "#888888"
+    xsize 180
+    ysize 60
+
+style fake_button_text:
+    color "#cccccc"
+    size 24
+    xalign 0.5
+    yalign 0.5
+    
 style window:
     xalign 0.5
     xfill True

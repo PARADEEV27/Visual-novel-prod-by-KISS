@@ -16,7 +16,7 @@ label scene2_Hitomi_and_Player():
     player_name "- У меня в классе много ребят, преуспевающих в учёбе"
     player_name "- Но я выделяюсь своими знаниями"
     player_name "- Не могу вспомнить, когда я заметил эту способность"
-    show Hitomi with fade 
+    call show_hitomi_base
     Hitomi "- Хей, [player_name]"
     player_name "({i}А вот и Хитоми, староста{/i})"
     player_name "- Привет"
@@ -28,3 +28,4 @@ label scene2_Hitomi_and_Player():
     player_name "- Ну, а я то тут как помогу? Я совсем не разбираюсь в таких вещах"
     Hitomi "- Игра должна быть полностью на английском, наш сценарист не сможет этим заниматься, как и другие участники команды"
     Hitomi "- Согласишься?..."
+    call screen foreign_save_detected
