@@ -37,7 +37,7 @@ image Hitomi = im.Scale("hitomi_base.png", 540, 1111)
 label park_location: #Создаю локацию Парк
     scene bg park
     # play music park_music
-
+    return
 ### Создание статов
 default ymiko_love = 0 ## Любовь Юмико
 
