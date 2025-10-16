@@ -43,7 +43,7 @@ default ymiko_love = 0 ## Любовь Юмико
 
 ### Старт игры
 label start:
-    $ player_name = renpy.input("Как тебя зовут?", length=15, exclude="{}[]#@*1234567890-=+_!№;%:?/$ ^&\~`.,()") or "Игрок"
+    $ player_name = renpy.input("Как тебя зовут?", length=15, exclude='''{}[]#@*1234567890-=+_!№;%:?/$ ^&\'~`.,()"''') or "Игрок"
     $ player_name = player_name.capitalize() 
     Player "Где я?"
     call show_hitomi_base
