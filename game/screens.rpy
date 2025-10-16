@@ -132,6 +132,7 @@ screen foreign_save_detected():
     zorder 200
     
     default attempts = 0
+    default running_enabled = False  # Флаг для включения убегания
     
     add "#00000080"
     
@@ -139,7 +140,7 @@ screen foreign_save_detected():
         xalign 0.5
         yalign 0.5
         xsize 700
-        ysize 350
+        ysize 250
         background Frame("gui/alert_frame.png", 25, 25)
         padding (40, 40)
         
@@ -147,18 +148,18 @@ screen foreign_save_detected():
             spacing 25
             xfill True
             
-            text "⚠ ОБНАРУЖЕНО ЧУЖОЕ СОХРАНЕНИЕ ⚠":
+            text "ОБНАРУЖЕНО СОХРАНЕНИЕ":
                 size 32
-                color "#ff3333"
+                color "#ffffff"
                 bold True
                 xalign 0.5
                 
-            text "Загрузить чужое сохранение?":
+            text "Загрузить?":
                 size 28
-                color "#ffff00"
+                color "#cbcbcb"
                 xalign 0.5
                 
-            null height 40
+            null height -20
             
             hbox:
                 xalign 0.5
@@ -175,10 +176,11 @@ screen foreign_save_detected():
                 # Кнопка НЕТ - не закрывает окно, но даёт стат
                 button:
                     style "fake_button"
-                    at running_button_transform
+                    at (running_button_transform if running_enabled else None)  # Условный трансформ
                     action [
                         Play("sound", "audio/beep.mp3"),
                         SetScreenVariable("attempts", attempts + 1),
+                        SetScreenVariable("running_enabled", True),  # Включаем убегание после первого нажатия
                         If(attempts == 0, 
                             Function(renpy.notify, "Системная ошибка: действие недоступно"),
                             If(attempts == 2,
@@ -214,8 +216,8 @@ style confirm_button:
     ysize 60
 
 style fake_button:
-    background "#666666"
-    hover_background "#888888"
+    background "#132349"
+    hover_background "#243fa2"
     xsize 180
     ysize 60
 
@@ -224,8 +226,6 @@ style fake_button_text:
     size 24
     xalign 0.5
     yalign 0.5
-
-#всё
 
 style window:
     xalign 0.5
