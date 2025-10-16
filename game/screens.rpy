@@ -167,7 +167,7 @@ screen foreign_save_detected():
                 
                 # Кнопка ДА - единственный способ продолжить
                 textbutton "ДА":
-                    style "confirm_button"
+                    style "fake_button"
                     action [
                         Play("sound", "audio/click.mp3"),
                         Return(True)  # Закрывает окно и продолжает игру

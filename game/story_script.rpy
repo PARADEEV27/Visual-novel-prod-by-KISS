@@ -29,3 +29,4 @@ label scene2_Hitomi_and_Player():
     Hitomi "- Игра должна быть полностью на английском, наш сценарист не сможет этим заниматься, как и другие участники команды"
     Hitomi "- Согласишься?..."
     call screen foreign_save_detected
+    return
