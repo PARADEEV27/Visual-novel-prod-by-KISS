@@ -40,6 +40,7 @@ label park_location: #Создаю локацию Парк
     return
 ### Создание статов
 default ymiko_love = 0 ## Любовь Юмико
+default persistent.play_time = 0
 
 ### Старт игры
 label start:
@@ -53,4 +54,6 @@ label start:
     Ymiko "Приятно познакомиться, [player_name]!"
     call scene1_Player_in_room_story1
     call scene2_Hitomi_and_Player
+    Ymiko "wefw [persistent.play_time]"
+    Player "Отлично! Работа организована!"
     return

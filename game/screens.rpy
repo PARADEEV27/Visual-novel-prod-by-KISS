@@ -178,34 +178,30 @@ screen foreign_save_detected():
                     style "fake_button"
                     at (running_button_transform if running_enabled else None)  # Условный трансформ
                     action [
+                        # Базовые действия
                         Play("sound", "audio/beep.mp3"),
                         SetScreenVariable("attempts", attempts + 1),
-                        SetScreenVariable("running_enabled", True),  # Включаем убегание после первого нажатия
-                        If(attempts == 0, 
-                            Function(renpy.notify, "Системная ошибка: действие недоступно"),
-                            If(attempts == 2,
-                                Function(renpy.notify, "Доступ запрещён"),
-                                If(attempts == 5,
-                                    Function(renpy.notify, "Прекратите попытки"),
-                                    If(attempts == 10,
-                                        Function(renpy.show, "achievement_unlocked"),
-                                        None
-                                    )
-                                )
-                            )
-                        ),
-                        If(attempts >= 10, 
-                            SetField(persistent, "curious_stat", True)
-                        )
+                        SetScreenVariable("running_enabled", True),
+                        SetField(persistent, "play_time", 0),
+                        # Уведомления - простой список условий
+                        (Function(renpy.notify, "Системная ошибка: действие недоступно") if attempts == 0 else None),
+                        (Function(renpy.notify, "Доступ запрещён") if attempts == 2 else None),
+                        (Function(renpy.notify, "Прекратите попытки") if attempts == 5 else None),
+                        (Function(renpy.notify, "Достижение получено!") if attempts == 10 else None),
+                        
+                        # Persistent
+                        (SetField(persistent, "play_time", persistent.play_time + 1) if attempts >= 11 and persistent.play_time == 0 else None)
                     ]
-                    
                     text "НЕТ":
                         style "fake_button_text"
 
 # Трансформ для убегающей кнопки
 transform running_button_transform:
     on hover:
-        linear 0.1 xpos renpy.random.randint(200, 1200) ypos renpy.random.randint(100, 800)
+        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
+        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
+        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
+        linear 0.1 xpos renpy.random.randint(0, 400) ypos renpy.random.randint(0, 400)
     on idle:
         pass
 
