@@ -23,7 +23,7 @@ label show_hitomi_base:
         alpha 0.0
         xalign 0.5
         parallel:
-            ease 1.0 alpha 1.0
+            ease 0.5 alpha 1.0
     return
 
 ### Текстуры локаций
@@ -40,7 +40,6 @@ label park_location: #Создаю локацию Парк
     return
 ### Создание статов
 default ymiko_love = 0 ## Любовь Юмико
-default persistent.play_time = 0
 
 ### Старт игры
 label start:
@@ -50,10 +49,6 @@ label start:
     call show_hitomi_base
     Ymiko "Ты в игре!"
     call park_location ## Вызываю локацию Парк  
-    Player "Отлично! Работа организована!"
-    Ymiko "Приятно познакомиться, [player_name]!"
     call scene1_Player_in_room_story1
     call scene2_Hitomi_and_Player
-    Ymiko "wefw [persistent.play_time]"
-    Player "Отлично! Работа организована!"
-    return
+    Player "persistent.clicked_not_in_save = [persistent.clicked_not_in_save]"

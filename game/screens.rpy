@@ -132,8 +132,8 @@ screen foreign_save_detected():
     zorder 200
     
     default attempts = 0
-    default running_enabled = False  # Флаг для включения убегания
-    
+    default running_enabled = False
+
     add "#00000080"
     
     frame:
@@ -165,34 +165,26 @@ screen foreign_save_detected():
                 xalign 0.5
                 spacing 100
                 
-                # Кнопка ДА - единственный способ продолжить
                 textbutton "ДА":
                     style "fake_button"
                     action [
                         Play("sound", "audio/click.mp3"),
-                        Return(True)  # Закрывает окно и продолжает игру
+                        Return(True)
                     ]
                 
-                # Кнопка НЕТ - не закрывает окно, но даёт стат
                 button:
                     style "fake_button"
-                    at (running_button_transform if running_enabled else None)  # Условный трансформ
+                    at (running_button_transform if running_enabled else None)
                     action [
-                        # Базовые действия
                         Play("sound", "audio/beep.mp3"),
                         SetScreenVariable("attempts", attempts + 1),
                         SetScreenVariable("running_enabled", True),
-                        SetField(persistent, "play_time", 0),
-                        # Уведомления - простой список условий
-                        (Function(renpy.notify, "Системная ошибка: действие недоступно") if attempts == 0 else None),
-                        (Function(renpy.notify, f"Достижение УПЁРТЫЙ получено!") if attempts >= 1 else None),
-                        # Persistent
-                        (SetField(persistent, "play_time", persistent.play_time + 1) if attempts >= 1 and persistent.play_time == 0 else None)
+                        SetField(persistent, "clicked_not_in_save", True),
+                        (Function(renpy.notify, "Системная ошибка: действие недоступно") if attempts == 0 else None)
                     ]
                     text "НЕТ":
                         style "fake_button_text"
 
-# Трансформ для убегающей кнопки
 transform running_button_transform:
     on hover:
         linear 0.1 xpos renpy.random.randint(200, 400) ypos renpy.random.randint(200, 400)
@@ -201,12 +193,6 @@ transform running_button_transform:
         linear 0.1 xpos renpy.random.randint(200, 400) ypos renpy.random.randint(200, 400)
     on idle:
         pass
-
-style confirm_button:
-    background "#00aa00"
-    hover_background "#00ff00"
-    xsize 180
-    ysize 60
 
 style fake_button:
     background "#132349"
@@ -219,7 +205,6 @@ style fake_button_text:
     size 24
     xalign 0.5
     yalign 0.5
-
 style window:
     xalign 0.5
     xfill True
