@@ -185,12 +185,9 @@ screen foreign_save_detected():
                         SetField(persistent, "play_time", 0),
                         # Уведомления - простой список условий
                         (Function(renpy.notify, "Системная ошибка: действие недоступно") if attempts == 0 else None),
-                        (Function(renpy.notify, "Доступ запрещён") if attempts == 2 else None),
-                        (Function(renpy.notify, "Прекратите попытки") if attempts == 5 else None),
-                        (Function(renpy.notify, "Достижение получено!") if attempts == 10 else None),
-                        
+                        (Function(renpy.notify, f"Достижение УПЁРТЫЙ получено!") if attempts >= 1 else None),
                         # Persistent
-                        (SetField(persistent, "play_time", persistent.play_time + 1) if attempts >= 11 and persistent.play_time == 0 else None)
+                        (SetField(persistent, "play_time", persistent.play_time + 1) if attempts >= 1 and persistent.play_time == 0 else None)
                     ]
                     text "НЕТ":
                         style "fake_button_text"
