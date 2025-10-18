@@ -179,7 +179,7 @@ screen foreign_save_detected():
                         Play("sound", "audio/beep.mp3"),
                         SetScreenVariable("attempts", attempts + 1),
                         SetScreenVariable("running_enabled", True),
-                        SetField(persistent, "clicked_not_in_save", True),
+                        SetField(persistent, "player_clicked_no_in_save_event", True),
                         (Function(renpy.notify, "Системная ошибка: действие недоступно") if attempts == 0 else None)
                     ]
                     text "НЕТ":

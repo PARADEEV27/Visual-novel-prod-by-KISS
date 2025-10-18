@@ -28,6 +28,6 @@ label scene2_Hitomi_and_Player():
     player_name "— Ну, а я то тут как помогу? Я совсем не разбираюсь в таких вещах"
     Hitomi "— Игра должна быть полностью на английском, наш сценарист не сможет этим заниматься, как и другие участники команды"
     Hitomi "— Согласишься?..."
-    $ persistent.clicked_not_in_save = False
+    $ persistent.player_clicked_no_in_save_event = False
     call screen foreign_save_detected
     return
