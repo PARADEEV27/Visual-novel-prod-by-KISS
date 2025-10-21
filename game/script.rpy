@@ -40,7 +40,7 @@ image bg park = im.Scale("i.jfif", 1920, 1080)
 ### Музыка локаций #######################################################################
 # define audio.park_music = "---"
 ## Музыка локации Парк ↑
-
+define audio.void_music = "Литвин.mp3"
 ### Комбинирование элементов локаций #####################################################
 label park_location: #Создаю локацию Парк
     scene bg park
@@ -54,6 +54,8 @@ default persistent.player_clicked_no_in_save_event = False
 
 ### Старт игры ###########################################################################
 label start:
+    stop music
+    play sound void_music
     $ player_name = renpy.input("Как тебя зовут?", length=15, exclude='''{}[]#@*1234567890-=+_!№;%:?/$ ^&\'~`.,()"''') or "Игрок"
     $ player_name = player_name.capitalize() 
     Player "Где я?"
