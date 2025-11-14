@@ -31,3 +31,11 @@ label scene2_Hitomi_and_Player():
     $ persistent.player_clicked_no_in_save_event = False
     call screen foreign_save_detected
     return
+    player_name "— Даже не знаю, а много там работы?" #игра в этот момент должна виснуть
+    Hitomi "— Что?"
+    player_name "— Что?"
+    Hitomi "— Зачем спрашиваешь?..." #шрифт в этот момент должен меняться
+    player_name "— Эм..."
+    player_name "— Ну ты же..."
+    Hitomi "— Мы будем показывать эту игру на одной крупной конференции"
+    Hitomi "— Может быть нас заметят хорошие компании, может быть ты даже найдёшь хорошую работу"
