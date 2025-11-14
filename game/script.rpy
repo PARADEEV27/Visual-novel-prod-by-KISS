@@ -65,3 +65,4 @@ label start:
     call scene1_Player_in_room_story1
     call scene2_Hitomi_and_Player
     Player "persistent.player_clicked_no_in_save_event (Нажал нет) = [persistent.player_clicked_no_in_save_event]"
+    return

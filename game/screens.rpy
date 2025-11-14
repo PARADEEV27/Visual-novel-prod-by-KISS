@@ -168,7 +168,7 @@ screen foreign_save_detected():
                 textbutton "ДА":
                     style "fake_button"
                     action [
-                        Play("sound", "audio/Литвин.mp3"), ## Заменить на звук сохранения
+                        Play("sound", "audio/confirmation_003.ogg"), ## Звук сохранения
                         Return(True)
                     ]
                 
@@ -176,7 +176,7 @@ screen foreign_save_detected():
                     style "fake_button"
                     at (running_button_transform if running_enabled else None)
                     action [
-                        Play("sound", "audio/beep.mp3"), ## Заменить на звук ошибки нажатия
+                        Play("sound", "audio/error_005.ogg"), ## Звук ошибки нажатия
                         SetScreenVariable("attempts", attempts + 1),
                         SetScreenVariable("running_enabled", True),
                         SetField(persistent, "player_clicked_no_in_save_event", True),
