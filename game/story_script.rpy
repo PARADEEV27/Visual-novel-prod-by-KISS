@@ -39,40 +39,63 @@ label scene2_Hitomi_and_Player():
     player_name '"Ну ты же..."'
     Hitomi '"Мы будем показывать эту игру на одной крупной конференции"'
     Hitomi '"Может быть нас заметят хорошие компании, может быть ты даже найдёшь хорошую работу"'
-
-    define persistent.used_deny_phrases = set()
-    define deny_phrases = [
-        '"Извини, но нет"',
-        '"Это приятно знать, но тем не менее"',
-        '"Я ценю предложение, но нет"',
-        '"К сожалению, не могу"',
-        '"Спасибо, но я пас"',
-        '"Не сегодня, извини"'
+    
+    define conversation_pairs = [
+        # (вопрос Хитоми, отказ игрока, ответ Хитоми)
+        ("Ты у нас в классе лучше всех английский знаешь... Согласишься?", 
+        '"Извини, но нет"', 
+        "Это правда важно для нас, может подумаешь?"),
+        
+        ("Нам действительно нужна твоя помощь с переводом. Поможешь?", 
+        '"Это приятно знать, но тем не менее"', 
+        "Пожалуйста, Без тебя будет трудно."),
+        
+        ("Без тебя с переводом не справиться. Согласен присоединиться?", 
+        '"Я ценю предложение, но нет"', 
+        "Я уверена, ты бы отлично справился. Пересмотри решение?"),
+        
+        ("Я знаю, что ты занят, но это очень важно. Поможешь проекту?", 
+        '"К сожалению, не могу"', 
+        "Команда рассчитывает на тебя. Может, всё-таки да?"),
+        
+        ("Твои знания английского незаменимы для нас. Будешь в команде?", 
+        '"Спасибо, но я пас"', 
+        "Это шанс проявить себя. Уверена, ты не пожалеешь."),
+        
+        ("Проект не сдвинется с места без перевода. Ты с нами?", 
+        '"Не сегодня, извини"', 
+        "Подумай ещё раз, пожалуйста. Ты нам очень нужен.")
     ]
-    menu soglasie_menu:
-        Hitomi "Ты у нас в классе лучше всех английский знаешь... Согласишься?"
+
+default used_pairs = set()
+
+label soglasie_menu:
+    $ import random
+    python:
+        available_pairs = [i for i in range(len(conversation_pairs)) if i not in used_pairs]
+        
+        if not available_pairs:
+            used_pairs.clear()
+            available_pairs = list(range(len(conversation_pairs)))
+        
+        pair_index = random.choice(available_pairs)
+        used_pairs.add(pair_index)
+        
+        hitomi_ask, player_deny, hitomi_response = conversation_pairs[pair_index]
+    
+    menu:
+        Hitomi "[hitomi_ask]"
+        
         '"Да"':
             player_name '"Нуу... Хорошо, помогу тебе"'
             Hitomi "Отлично, спасибо! Сегодня после уроков будет сбор с командой нашего проекта, приходи"
             player_name '"Ладно, до встречи"'
             return
-        "Нет":
-            python:
-                import random
-                available_phrases = [p for p in deny_phrases if p not in persistent.used_deny_phrases]
-                
-                if not available_phrases:
-                    persistent.used_deny_phrases.clear()
-                    available_phrases = deny_phrases
-                
-                chosen_phrase = random.choice(available_phrases)
-                persistent.used_deny_phrases.add(chosen_phrase)
             
-            player_name "[chosen_phrase]"
-            Hitomi '"Это правда важно для нас, может подумаешь?"'
-            call soglasie_menu 
-
-    
+        "Нет":
+            player_name "[player_deny]"
+            Hitomi "[hitomi_response]"
+            call soglasie_menu
         
     #   menu ch: #Меню выбора
     # e "Как тебе музыка?" #Сам вопрос
