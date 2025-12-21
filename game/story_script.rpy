@@ -39,23 +39,38 @@ label scene2_Hitomi_and_Player():
     player_name '"Ну ты же..."'
     Hitomi '"Мы будем показывать эту игру на одной крупной конференции"'
     Hitomi '"Может быть нас заметят хорошие компании, может быть ты даже найдёшь хорошую работу"'
-    init python:
-        def soggen():
-            yield 1
-            player_name '"Извини, но нет"'
-            yield 2
-            player_name '"Это приятно знать, но тем не менее"'
-        gen = soggen()
-        menu soglasie:
-            player_name '"Согласиться?"'
-            '"Да"':
-                player_name '"Нуу... Хорошо, помогу тебе"'
-                Hitomi "Отлично, спасибо! Сегодня после уроков будет сбор с командой нашего проекта, приходи"
-                player_name '"Ладно, до встречи"'
-            "Нет":
-                next(gen)
-                Hitomi '"Это правда важно для нас, может подумаешь?"'
-                call soglasie
+
+    define persistent.used_deny_phrases = set()
+    define deny_phrases = [
+        '"Извини, но нет"',
+        '"Это приятно знать, но тем не менее"',
+        '"Я ценю предложение, но нет"',
+        '"К сожалению, не могу"',
+        '"Спасибо, но я пас"',
+        '"Не сегодня, извини"'
+    ]
+    menu soglasie_menu:
+        Hitomi "Ты у нас в классе лучше всех английский знаешь... Согласишься?"
+        '"Да"':
+            player_name '"Нуу... Хорошо, помогу тебе"'
+            Hitomi "Отлично, спасибо! Сегодня после уроков будет сбор с командой нашего проекта, приходи"
+            player_name '"Ладно, до встречи"'
+            return
+        "Нет":
+            python:
+                import random
+                available_phrases = [p for p in deny_phrases if p not in persistent.used_deny_phrases]
+                
+                if not available_phrases:
+                    persistent.used_deny_phrases.clear()
+                    available_phrases = deny_phrases
+                
+                chosen_phrase = random.choice(available_phrases)
+                persistent.used_deny_phrases.add(chosen_phrase)
+            
+            player_name "[chosen_phrase]"
+            Hitomi '"Это правда важно для нас, может подумаешь?"'
+            call soglasie_menu 
 
     
         
