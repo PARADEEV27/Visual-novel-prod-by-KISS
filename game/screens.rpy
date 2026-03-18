@@ -463,12 +463,12 @@ screen main_menu():
             text "[config.version]":
                 style "main_menu_version"
 
-    add "images/logo.png":
-        xalign 0.15
-        yalign 0.0
-    add "images/girls.png":
-        xalign 0.6
-        yalign 1.0
+    # add "images/logo.png":
+    #     xalign 0.15
+    #     yalign 0.0
+    # add "images/girls.png":
+    #     xalign 0.6
+    #     yalign 1.0
 
 
 style main_menu_frame is empty
