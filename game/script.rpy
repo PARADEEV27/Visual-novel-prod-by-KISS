@@ -44,8 +44,36 @@ image bg desk_night = "images/bg_desk_night.jpg"
 image bg black = "#000000"
 image bg white = "#ffffff"
 
-### Персонаж
+### Персонаж ###
 image ars = "images/ars.png" 
+
+### Счётчики настроения ###
+default inspiration = 0
+default meditative = 0
+default passionate = 0
+default doubt = 0
+
+### Переменные для статистики ###
+default total_choices = 0
+default poems_written = 0
+
+### Экран статистики ###
+screen inspiration_meter():
+    frame:
+        xalign 1.0 yalign 0.02
+        xmargin 10 ymargin 10
+        background Solid("#222222cc")
+        padding (10, 5)
+        vbox:
+            text "Вдохновение: [inspiration]" color "#f5d742" size 20 bold True
+            text "Выборов: [total_choices]" color "#aaaaaa" size 16
+
+### Экран для внутренних монологов (NVL режим) ###
+init python:
+    config.nvl_list_length = 20
+    ## Не менять значение!! ↑
+
+
 
 ### Плавные появления героев #############################################################
 label show_SPACE:
