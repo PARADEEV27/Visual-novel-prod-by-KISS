@@ -3,26 +3,49 @@
     ## - Коментарий
     # - закоментировать (отключить\включить часть кода)
 
+### Игра - "Поэт"
 
-### Определение персонажей игры. #########################################################
-define Ymiko = Character('Герой (Размышляет)', color="#c8ffc8",what_slow_cps=30)
-## Пресонаж: Юмико ↑
-define Rin = Character('Рин', color="#c8ffc8",what_slow_cps=70)
-## Пресонаж: Рин ↑
-define Hitomi = Character('Хитоми', color="#ffffff",what_slow_cps=70)
-## Пресонаж: Хитоми ↑
+define config.developer = True
+define config.name = "Отражение"
+define config.version = "1.0" 
+## Убрать позже в другой файл ↑
 
-### Создаем персонажа игрока с временным именем
-default player_name = "Игрок"
-define Player = Character('[player_name]', color="#c8ffc8", what_slow_cps=70)
-## Пресонаж: Игрок ↑
+### Определение персонажей игры. (Инициализация) #########################################################
+define a = Character("Арсений", color="#c8ffc8", who_outlines=[(1, "#0a5e0a")], image="ars", what_size=35)
+define inner = Character(None, what_color="#767676", what_size=35, what_italic=True)
+define autor = Character(None, what_color="#cccccc", what_size=35)
+define voice = Character("Катя", color="#c86464", who_outlines=[(1, "#5e0a0a")], what_size=35)
+define teacher = Character("Марья Ивановна", color="#64c8ff", what_size=35)
+define classmate = Character("Одноклассник", color="#ffaa64", what_size=35)
 
-### Текстуры персонажей ##################################################################
-# image Ymiko happy = im.Scale("Ymiko happy.png", 540, 1111)
-# image Ymiko sleep = im.Scale("Ymiko sleep.png", 540, 1111)
+### Музыка и звуки. #################################################
+define audio.winter = "audio/winter_wind.ogg"
+define audio.ambient_home = "audio/home_quiet.ogg"
+define audio.step = "audio/footstep_snow.ogg"
+define audio.pen = "audio/pen_scrape.ogg"
+define audio.door = "audio/door_open.ogg"
+define audio.bell = "audio/school_bell.ogg"
+define audio.page_turn = "audio/page_turn.ogg"
+define audio.clock = "audio/clock_tick.ogg"
+define audio.heartbeat = "audio/heartbeat.ogg"
 
-image SPACE = im.Scale("SPACE.jpg", 1920, 1080)
-## Текстура - Космоса ↑
+### Фоны локаций.
+image bg classroom = im.Scale("images/bg_classroom.jpg", 1950, 1550)
+image bg classroom_dusk = "images/bg_classroom_dusk.jpg"
+image bg street_day = im.Scale("images/bg_street_day.jpg", 2200, 1300)
+image bg street_dusk = im.Scale("images/bg_street_dusk.jpg", 1732, 1400)
+image bg street_night = "images/bg_street_night.jpg"
+image bg park = "images/bg_park.jpg"
+image bg home_hall = "images/bg_home_hall.jpg"
+image bg home_room = "images/bg_home_room.jpg"
+image bg window_view = "images/bg_window_view.jpg"
+image bg desk = "images/bg_desk.jpg"
+image bg desk_night = "images/bg_desk_night.jpg"
+image bg black = "#000000"
+image bg white = "#ffffff"
+
+### Персонаж
+image ars = "images/ars.png" 
 
 ### Плавные появления героев #############################################################
 label show_SPACE:
