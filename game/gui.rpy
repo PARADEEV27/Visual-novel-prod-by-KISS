@@ -26,7 +26,7 @@ define config.check_conflicting_properties = True
 ## Цвета текста в интерфейсе.
 
 ## Акцентный цвет используется в заголовках и подчёркнутых текстах.
-define gui.accent_color = '#7fc3ff'
+define gui.accent_color = '#f5e7b9'
 
 ## Цвет, используемый в текстовой кнопке, когда она не выбрана и не наведена.
 define gui.idle_color = '#888888'
@@ -89,8 +89,8 @@ define gui.title_text_size = 75
 ## Главное и игровое меню. #####################################################
 
 ## Изображения, используемые в главном и игровом меню.
-define gui.main_menu_background = "gui/main_menu.png"
-define gui.game_menu_background = "gui/game_menu.png"
+define gui.main_menu_background =  im.Scale("gui/main_menu.png", 1920, 1080)
+define gui.game_menu_background =  im.Scale("gui/main_menu.png", 1920, 1080)
 
 
 ## Диалог ######################################################################
@@ -109,7 +109,7 @@ define gui.textbox_yalign = 1.0
 ## Это могут быть целые значения в пикселях слева и сверху от начала окна или
 ## процентное отношение, например, 0.5 для центрирования.
 define gui.name_xpos = 360
-define gui.name_ypos = 0
+define gui.name_ypos = 22
 
 ## Горизонтальное выравнивание имени персонажа. Это может быть 0.0 для
 ## левоориентированного, 0.5 для центрированного и 1.0 для правоориентированного
@@ -134,7 +134,7 @@ define gui.namebox_tile = False
 ## значения в пикселях слева и сверху от текстового окна или процентное
 ## отношение, например, 0.5 для центрирования.
 define gui.dialogue_xpos = 201
-define gui.dialogue_ypos = 75
+define gui.dialogue_ypos = 95
 
 ## Максимальная ширина текста диалога в пикселях.
 define gui.dialogue_width = 1600

@@ -424,10 +424,10 @@ style navigation_button_text:
     text_align 0.5
     size 42
     bold False
-    color "#9cb2cc"
+    color "#ddd4b5"
     # Обводка текста: (толщина, цвет, смещение_x, смещение_y)
-    outlines [ (3, "#141442", 0, 0) ]
-    hover_outlines [ (2, "#40485b", 0, 0) ]
+    outlines [ (3, "#292518", 0, 0) ]
+    hover_outlines [ (2, "#797979", 0, 0) ]
 
 
 ## Экран главного меню #########################################################
