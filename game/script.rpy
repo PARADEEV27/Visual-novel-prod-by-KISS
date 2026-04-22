@@ -21,17 +21,15 @@ define stranger = Character("Незнакомец", color="#d464ff", what_size=4
 
 ### Музыка и звуки. ######################################################################################
 
-define audio.winter = "audio/winter_wind.ogg" #
-define audio.ambient_home = "audio/home_quiet.ogg"
-define audio.step = "audio/footstep_snow.ogg" #
-define audio.pen = "audio/pen_scrape.ogg"
+define audio.winter = "audio/winter_wind.ogg" ## Зимний ветер на фон в парке 
+define audio.step = "audio/footstep_snow.ogg" ## Шаги
 define audio.door = "audio/door_open.ogg"
-define audio.bell = "audio/school_bell.ogg" #
-define audio.page_turn = "audio/page_turn.ogg"
+define audio.bell = "audio/school_bell.ogg" ## Школьный звонок
 define audio.clock = "audio/clock_tick.ogg"
-define audio.heartbeat = "audio/heartbeat.ogg"
-define audio.tear = "audio/paper_tear.ogg"
-
+define audio.clock = "audio/clock-tick.ogg"
+define audio.gul = "audio/gul.ogg"
+define audio.whoosh = "audio/вуш-2.ogg"
+define audio.tolpa = "audio/tolpa.ogg"
 ### Фоны локаций. ########################################################################################
 
 image bg classroom = im.Scale("images/bg_classroom.PNG", 1920, 1080)
@@ -146,7 +144,7 @@ label start:
     ## Ввод имени
     $ player_name = renpy.input("Как тебя зовут?", length = 15, default="Макс", exclude='''{}[]#@*1234567890-=+_!№;%:?/$ ^&\'~`.,()"''') 
     $ player_name = player_name.strip().capitalize()
-    ## ВАЖНО! я не могу исправить баг с пустым именем.
+    ## ВАЖНО! Не могу исправить баг с пустым именем.
 
     ## Интерфейс
     show screen inspiration_meter
@@ -160,9 +158,8 @@ label start:
     autor "Есть только моменты. И это один из них..."
     
     stop music
-
     scene bg classroom with dissolve
-    play sound bell volume 0.05
+    #play sound bell volume 0.05
 
     pause 1.0
     
@@ -171,11 +168,12 @@ label start:
     label scene_classroom:
         pause 0.02
         scene bg classroom with hpunch
-        
+        play sound whoosh volume 0.7
         show Marya with dissolve:
             xalign 0.75
             yalign -0.5
-        stop sound            
+        stop sound 
+
         teacher "Отвечает - [player_name]. "
         teacher "Расскажи нам о стихотворении «Пророк»? Как ты его понял? "
 
@@ -198,13 +196,15 @@ label start:
         inner "Пушкин писал это не для оценок. Он писал кровью сердца."
         
         play sound bell volume 0.05
-        hide Marya with dissolve
         
         autor "*Звенит звонок. Класс наполняется шумом.*"
+        
+        pause 0.6
+        stop sound
+        play sound tolpa volume 0.04
+        hide Marya with dissolve
     
         classmate "Слышь, [player_name], ты чё реально эту фигню читал?"
-        
-        stop sound
         
         a "Я просто..." 
         
@@ -222,7 +222,7 @@ label start:
                 inner "Обычные разговоры. Обычные люди. А во мне всё бурлит."
                 
                 jump scene_exit_alone
-                
+                stop sound
             "Иди, я догоню.":
                 $ meditative += 1
                 $ total_choices += 1
@@ -232,10 +232,10 @@ label start:
                 inner "Слова улетят, если не записать их сейчас."
                 
                 jump scene_write_first
+                stop sound
 
 ### СЦЕНА 2: Попытка записать стихи #####################################################################
 label scene_write_first:
-    play sound pen loop
     
     autor "*Ты достаёшь потрепанный блокнот. Страницы пахнут пылью и надеждой.*"
     
@@ -246,8 +246,8 @@ label scene_write_first:
             $ meditative += 2
             $ poems_written += 1
             
-            inner "Парты пусты. Мел крошится в тишине. Скрип половиц."
-            inner "«И пустота звенит во мне набатом, напоминая, что я здесь чужой»."
+            inner "Парты пусты, да и класс разбежался"
+            inner "Только я с блокнотом и ручкой остался"
             
             jump scene_exit_school
             
@@ -255,25 +255,26 @@ label scene_write_first:
             $ passionate += 2
             $ poems_written += 1
             
-            inner "Надоело! Надоело быть правильным. Глаголом жечь? Да я сам сгорю!"
-            inner "«Я разорву шаблон унылых фраз, пусть лучше хаос, чем молчание сейчас»."
+            inner "Меня съедают мысли о допущеных ошибках"
+            inner "Как прятал боль свою сердечную в улыбках..."
             
             jump scene_exit_school
 
 ### СЦЕНА 3: Выход из школы (общий путь) ##################################################################
 
 label scene_exit_school:
-    play sound step loop volume 0.2
+    play sound step loop volume 0.14
     scene bg street_day with dissolve
     pause 1.0
     stop sound
+
     autor "*Ты выходишь на крыльцо. Холодный воздух отрезвляет после духоты класса.*"
     
     jump scene_meeting
 
 label scene_exit_alone:
     stop sound
-    play sound step loop volume 0.2
+    play sound step loop volume 0.14
     scene bg street_day with dissolve
     pause 1.0
     stop sound
@@ -290,6 +291,7 @@ label scene_exit_alone:
     inner "Вот женщина с сумками. Тяжело идёт. Домой спешит, к семье."
     inner "Вот старик с газетой. Остановился, читает. Мир рушится, а он читает."
     inner "Вот влюблённые. Держатся за руки, смеются. Не замечают ничего."
+    
     stop sound
     menu:
         autor "О чём думать?"
@@ -314,13 +316,14 @@ label scene_exit_alone:
 
 ### СЦЕНА 4: Встреча с одноклассницей #####################################################################
 label scene_meeting:
-    
+    play sound whoosh volume 0.7
     show Katya with hpunch:
         xalign 0.75
         yalign -0.4
-    
+    play sound winter volume 0.02
+
     autor "*Из холодного воздуха, слегка испугав героя, появляется Катя — одноклассница, с которой они сидят через ряд.*"
-    
+
     voice "Ты чего пялишься на прохожих?"
     
     a "Привет, Кать, да я не пялюсь, просто вдохновляюсь видами" 
@@ -376,13 +379,14 @@ label scene_meeting:
             hide Katya with dissolve
 
             inner "Врать легко. Врать себе — ещё легче. Но почему так тоскливо?"
-            
+    
+    stop sound        
     jump scene_park
 
 ### СЦЕНА 5: Парк #########################################################################################
 label scene_park:
     scene bg park with dissolve
-    play ambient winter fadein 2.0
+    play sound winter volume 0.02
     
     autor "*Ты сворачиваешь в парк. Деревья стоят голые, чёрные на фоне серого неба.*"
     
@@ -425,18 +429,19 @@ label scene_park:
 ### СЦЕНА 6: Дом ##########################################################################################
 label scene_home:
     scene bg home_hall with dissolve
-    play sound door
+    pause 1.0
     stop sound
-    play music ambient_home loop volume 0.2
+    play sound clock loop volume 2.2
     
     autor "*Ты пришёл домой*"
     autor "*Дома тихо. Родители ещё на работе.*"
     
     inner "Квартира пуста. Можно дышать полной грудью. Можно быть собой."
     
+    stop sound
     scene bg desk_night with dissolve
-    play sound clock loop
-    
+    play sound clock loop volume 1.2
+
     autor "*Твоя комната. Твой стол. Твоя тетрадь.*"
     
     menu:
@@ -446,12 +451,12 @@ label scene_home:
             $ passionate += 2
             $ poems_written += 1
             $ total_choices += 1
-            play sound pen loop
             
             autor "*Ручка скользит по бумаге, оставляя чернильный след.*"
             
             inner "Строчки рождаются одна за другой. Это как наваждение."
             
+            stop sound
             jump scene_night
             
         "Лечь на кровать и смотреть в потолок.":
@@ -464,6 +469,7 @@ label scene_home:
             
             autor "*Мысли текут медленно, лениво. День заканчивается.*"
             
+            stop sound
             jump scene_night
 
 ### СЦЕНА 7: Ночь и решение ###############################################################################
@@ -471,17 +477,13 @@ label scene_night:
     scene bg black with dissolve
     "..."
     scene bg desk_night with dissolve
-    play music winter loop volume 0.1
-    stop sound
-    play sound clock
+    play sound clock loop volume 1.2
     
     autor "*Час пролетел незаметно. На столе — исписанный лист.*"
     autor "*Ночь опускается на город. За окном фонари рисуют жёлтые круги на снегу.*"
     
     inner "Завтра в школу. Опять этот бесконечный круг."
     inner "Но что-то изменилось во мне за этот день. Или только начинает меняться?"
-    
-    play sound heartbeat loop volume 0.3
     
     autor "*В тишине ночи ты слышишь стук собственного сердца. Или это пульс вселенной?*"
     
@@ -502,10 +504,12 @@ label scene_night:
         "Может, это всё глупости? Подростковые фантазии.":
             $ doubt += 3
             $ total_choices += 1
-            play sound tear
+            
             autor "*Ты берёшь исписанный лист. Хочется скомкать и выбросить.*"
+            
             menu:
                 autor "Выбросить или оставить?"
+                
                 "Выбросить.":
                     $ doubt += 2
                     
@@ -524,7 +528,6 @@ label scene_night:
 
 ### КОНЦОВКИ ##############################################################################################
 label ending:
-    stop music fadeout 2.0
     stop sound
     scene bg black with dissolve
     pause 1.0
@@ -540,7 +543,7 @@ label ending:
     # Логика определения концовки
     if inspiration >= 5 and doubt < 3:
         jump ending_true_poet
-    elif passionate >= 5 and doubt < 4:
+    elif passionate == 4 and doubt == 3 and inspiration == 3:
         jump ending_rebel
     elif meditative >= 5 and doubt < 5:
         jump ending_philosopher
@@ -551,7 +554,9 @@ label ending:
 
 label ending_true_poet:
     scene bg desk with dissolve
-    
+    stop sound
+    play sound tolpa volume 0.07
+
     autor "*Ты стоишь на сцене маленького литературного кафе.*"
     autor "*В руках — сборник. Твой сборник. Пахнет типографской краской.*"
     
@@ -564,39 +569,39 @@ label ending_true_poet:
     
     inner "Я обрел голос. Я стал тем, кем должен был стать."
     
-    autor "*Путь был долгим. Но стихи стоили каждой бессонной ночи.*"
+    autor "Путь был долгим. Но стихи стоили каждой бессонной ночи."
     
     jump credits
 
 label ending_rebel:
     scene bg street_night with dissolve
    
-    autor "*Ты стал голосом поколения. Твои стихи печатают на заборах, их цитируют на митингах.*"
-    autor "*Они острые, как бритва. Они жгут глаголом.*"
+    autor "Ты стал голосом поколения. Твои стихи печатают на заборах, их цитируют на митингах."
+    autor "Они острые, как бритва. Они жгут глаголом."
     
     show text "[poem_text]" at truecenter with dissolve
     pause 7.0
     hide text with dissolve
     
-    autor "*Но иногда, глядя в зеркало, ты видишь не поэта. Ты видишь оратора. Бунтаря.*"
+    autor "Но иногда, глядя в зеркало, ты видишь не поэта. Ты видишь оратора. Бунтаря."
     
     inner "Я хотел просто писать. А получилось — кричать."
     
-    autor "*Может, в этом и есть моя правда.*"
+    autor "Может, в этом и есть суть?"
     
     jump credits
 
 label ending_philosopher:
     scene bg street_day with dissolve
     
-    autor "*Ты пишешь в стол. Редко публикуешься. Твои стихи сложны, полны метафор и отсылок.*"
-    autor "*Их понимают единицы. Но те, кто понимают, — становятся твоими друзьями на всю жизнь.*"
+    autor "Ты пишешь в стол. Редко публикуешься. Твои стихи сложны, полны метафор и отсылок."
+    autor "Их понимают единицы. Но те, кто понимают, — становятся твоими друзьями на всю жизнь."
     
     show text "[poem_text]" at truecenter with dissolve
     pause 7.0
     hide text with dissolve
     
-    autor "*Ты нашел гармонию в созерцании. Тишина перестала пугать, она стала холстом.*"
+    autor "Ты нашел гармонию в созерцании. Тишина перестала пугать, она стала холстом."
     
     inner "Я слышу, как растет трава. Я слышу, как падает снег. Этого достаточно."
     
@@ -605,18 +610,18 @@ label ending_philosopher:
 label ending_silence:
     scene bg home_hall with dissolve
     
-    autor "*Блокнот пылится на дальней полке. Ты выбрал другую дорогу. Стабильную, понятную, обычную.*"
-    autor "*Офис, дом, телевизор.*"
-    autor "*Но однажды ночью ты просыпаешься от строки, которая пришла во сне.*"
-    autor "*Ты не записываешь её.*"
-    autor "*Утром ты её уже не помнишь. Только щемящее чувство потери.*"
+    autor "Блокнот пылится на дальней полке. Ты выбрал другую дорогу. Стабильную, понятную, обычную."
+    autor "Офис, дом, телевизор."
+    autor "Но однажды ночью ты просыпаешься от строки, которая пришла во сне."
+    autor "Ты не записываешь её."
+    autor "Утром ты её уже не помнишь. Только щемящее чувство потери."
     
     inner "Иногда я думаю: а что, если бы тогда, в тот зимний вечер, я не выбросил листок?"
     
     jump credits
 
 label ending_common:
-    scene bg classroom_dusk with dissolve
+    scene bg desk with dissolve
     
     autor "*Жизнь идет своим чередом. Ты окончил школу, поступил в институт.*"
     autor "*Иногда что-то пишешь в заметках телефона. Друзьям нравится, но дальше лайков дело не идет.*"
@@ -625,8 +630,8 @@ label ending_common:
     pause 7.0
     hide text with dissolve
     
-    autor "*Ты не стал великим поэтом. Но ты стал человеком, который умеет видеть красоту в обыденном.*"
-    autor "*Разве этого мало?*"
+    autor "Ты не стал великим поэтом. Но ты стал человеком, который умеет видеть красоту в обыденном."
+    autor "Разве этого мало?"
     
     jump credits
 
