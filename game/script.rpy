@@ -23,31 +23,24 @@ define stranger = Character("Незнакомец", color="#d464ff", what_size=4
 
 define audio.winter = "audio/winter_wind.ogg" ## Зимний ветер на фон в парке 
 define audio.step = "audio/footstep_snow.ogg" ## Шаги
-define audio.door = "audio/door_open.ogg"
 define audio.bell = "audio/school_bell.ogg" ## Школьный звонок
-define audio.clock = "audio/clock_tick.ogg"
-define audio.clock = "audio/clock-tick.ogg"
-define audio.gul = "audio/gul.ogg"
-define audio.whoosh = "audio/вуш-2.ogg"
-define audio.tolpa = "audio/tolpa.ogg"
+define audio.clock = "audio/clock-tick.ogg" ## Часы дома
+define audio.whoosh = "audio/вуш-2.ogg" ## Появление персонажей
+define audio.tolpa = "audio/tolpa.ogg" ## Шум толпы
+
 ### Фоны локаций. ########################################################################################
 
-image bg classroom = im.Scale("images/bg_classroom.PNG", 1920, 1080)
-image bg classroom_dusk =  im.Scale("images/bg_classroom.PNG", 1920, 1080)
-image bg street_day = im.Scale("images/bg_street_day.PNG", 1920, 1080)
-image bg street_dusk = im.Scale("images/bg_street_dusk.PNG", 1920, 1080)
-image bg street_night =  im.Scale("images/bg_street_night.PNG", 1920, 1080)
-image bg park =  im.Scale("images/bg_park.PNG", 1920, 1080)
-image bg home_hall =  im.Scale("images/bg_home_hall.JPG", 1920, 1080)
-image bg home_room =  im.Scale("images/bg_home_room.PNG", 1920, 1080)
-image bg window_view =  im.Scale("images/bg_window_view.PNG", 1920, 1080)
-image bg desk =  im.Scale("images/bg_desk.JPG", 1920, 1080)
-image bg desk_night =  im.Scale("images/bg_desk_night.PNG", 1920, 1080)
-image Marya = im.Scale("images/Marya.PNG", 1180, 1480)
-image Katya = im.Scale("images/Katya.PNG", 1080, 1480)
-image bg black = "#000000"
-image bg white = "#ffffff"
-# image ars = "images/ars.png" 
+image bg classroom = im.Scale("images/bg_classroom.PNG", 1920, 1080) ## Класс
+image bg street_day = im.Scale("images/bg_street_day.PNG", 1920, 1080) ## Локация с Катей
+image bg street_night =  im.Scale("images/bg_street_night.PNG", 1920, 1080) ## Концовка на дороге
+image bg park =  im.Scale("images/bg_park.PNG", 1920, 1080) ## Локация с дедом
+image bg home_hall =  im.Scale("images/bg_home_hall.JPG", 1920, 1080) ## Зал в доме
+image bg desk =  im.Scale("images/bg_desk.JPG", 1920, 1080) ## Кофейня/ресторан
+image bg desk_night =  im.Scale("images/bg_desk_night.PNG", 1920, 1080) ## Ночные записи
+image Marya = im.Scale("images/Marya.PNG", 1180, 1480) ## Учитель
+image Katya = im.Scale("images/Katya.PNG", 1080, 1480) ## Катя
+image bg black = "#000000" ## Чёрный экран
+image bg white = "#ffffff" ## Белый экран
 
 ### Счётчики настроения ##################################################################################
 
@@ -575,7 +568,7 @@ label ending_true_poet:
 
 label ending_rebel:
     scene bg street_night with dissolve
-   
+    
     autor "Ты стал голосом поколения. Твои стихи печатают на заборах, их цитируют на митингах."
     autor "Они острые, как бритва. Они жгут глаголом."
     
@@ -593,7 +586,7 @@ label ending_rebel:
 
 label ending_philosopher:
     scene bg street_day with dissolve
-    
+
     autor "Ты пишешь в стол. Редко публикуешься. Твои стихи сложны, полны метафор и отсылок."
     autor "Их понимают единицы. Но те, кто понимают, — становятся твоими друзьями на всю жизнь."
     
@@ -622,7 +615,7 @@ label ending_silence:
 
 label ending_common:
     scene bg desk with dissolve
-    
+    play sound tolpa volume 0.07
     autor "*Жизнь идет своим чередом. Ты окончил школу, поступил в институт.*"
     autor "*Иногда что-то пишешь в заметках телефона. Друзьям нравится, но дальше лайков дело не идет.*"
     
