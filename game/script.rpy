@@ -11,13 +11,13 @@ define config.version = "Alpha"
 
 ### Определение персонажей игры. (Инициализация) #########################################################
 
-define a = Character("[player_name]", color="#c8ffc8", who_outlines=[(1, "#0a5e0a")], image="ars", what_size=45)
+define a = Character("[player_name]", color="#e3b944", what_size=45)
 define inner = Character(None, what_color="#9c9c9c", what_size=45, what_italic=True,)
 define autor = Character(None, what_color="#cccccc", what_size=45)
-define voice = Character("Катя", color="#c86464", who_outlines=[(1, "#5e0a0a")], what_size=45)
+define voice = Character("Катя", color="#478eb2", who_outlines=[(1, "#140758")], what_size=45)
 define teacher = Character("Марья Ивановна", color="#b41844", what_size=45)
 define classmate = Character("Одноклассник", color="#ffaa64", what_size=45)
-define stranger = Character("Незнакомец", color="#d464ff", what_size=45)
+define stranger = Character("Незнакомец", color="#6d27a3", what_size=45)
 
 ### Музыка и звуки. ######################################################################################
 
@@ -51,10 +51,10 @@ default doubt = 0 ## сомнение
 
 ### Переменные для статистики ############################################################################
 
-default total_choices = 0 ## Выбор
-default poems_written = 0 ##
-default player_name = "" ##
-default poem_text = "" ##
+default total_choices = 0 ## Счётчик выборов
+default poems_written = 0 ## Счётчик стихов
+default player_name = "" 
+default poem_text = "" 
 default final_poem_quality = 0 # Вычисления в конце
 
 ### Экран статистики #####################################################################################
@@ -377,6 +377,7 @@ label scene_meeting:
     jump scene_park
 
 ### СЦЕНА 5: Парк #########################################################################################
+
 label scene_park:
     scene bg park with dissolve
     play sound winter volume 0.02
@@ -616,6 +617,7 @@ label ending_silence:
 label ending_common:
     scene bg desk with dissolve
     play sound tolpa volume 0.07
+
     autor "*Жизнь идет своим чередом. Ты окончил школу, поступил в институт.*"
     autor "*Иногда что-то пишешь в заметках телефона. Друзьям нравится, но дальше лайков дело не идет.*"
     
